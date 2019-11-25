@@ -1,0 +1,16 @@
+<h1>Sign up</h1>
+
+<form action="<%= users_path %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <p>名前:</p>
+  <input type="text" name="user[name]" size="30" maxlength="20">
+  <p>Email:</p>
+  <input type="email" name="user[email]" size="30" maxlength="20">
+  <p>パスワード:</p>
+  <input type="password" name="user[password]" size="30" maxlength="20">
+  <p>確認用パスワード:</p>
+  <input type="password" name="user[password_confirmation]" size="30" maxlength="20">
+  <p><input type="submit" value="登録"></p>
+</form>
+
+<%= link_to 'Back', users_path %>
