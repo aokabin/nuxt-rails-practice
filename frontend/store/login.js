@@ -5,23 +5,19 @@ export const state = {
 }
 
 export const mutations = {
-  setLoginData: (state, params) => {
-    state.email = params.email
-    state.password = params.password
-  },
   setKey: (state, data) => {
     state.key = data.key
   }
 }
 
 export const actions = {
-  login: ({ commit, state, dispatch }) => {
+  login: ({ commit, dispatch }, { email, password }) => {
     return new Promise(function(resolve, reject) {
       const api = dispatch(
         'backend/login',
         {
-          email: state.email,
-          password: state.password
+          email,
+          password
         },
         { root: true }
       )
@@ -30,7 +26,7 @@ export const actions = {
         commit('setKey', resp.data)
       })
       api.catch((error) => {
-        console.log('get netstatus got error', error)
+        console.log('got error', error)
       })
     })
   }
