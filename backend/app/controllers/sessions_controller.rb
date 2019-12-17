@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < LoggedInController
   before_action :require_sign_in!, only: [:destroy]
   before_action :set_user, only: [:create]
 
@@ -18,6 +18,11 @@ class SessionsController < ApplicationController
   def destroy
     sign_out
     redirect_to login_path
+  end
+
+  def check
+    has_session = current_user.present?
+    render :json => { session: has_session }
   end
 
   private
