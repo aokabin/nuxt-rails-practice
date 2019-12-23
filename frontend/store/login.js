@@ -1,7 +1,8 @@
 export const state = {
   email: '',
   password: '',
-  key: ''
+  key: '',
+  session: false
 }
 
 export const mutations = {
@@ -11,6 +12,21 @@ export const mutations = {
 }
 
 export const actions = {
+  check: (commit, dispatch) => {
+    return new Promise(function(resolve, reject) {
+      const api = dispatch(
+        'backend/check',
+        { root: true }
+      )
+
+      api.then((resp) => {
+        commit('setKey', resp.data)
+      })
+      api.catch((error) => {
+        console.log('got error', error)
+      })
+    })
+  },
   login: ({ commit, dispatch }, { email, password }) => {
     return new Promise(function(resolve, reject) {
       const api = dispatch(

@@ -21,8 +21,7 @@ class SessionsController < LoggedInController
   end
 
   def check
-    has_session = current_user.present?
-    render :json => { session: has_session }
+    render :json => payload(current_user)
   end
 
   private
@@ -39,4 +38,10 @@ class SessionsController < LoggedInController
     params.require(:session).permit(:email, :password)
   end
 
+  def payload(user)
+    return {} unless user and user.id
+    {
+      auth_token: JsonWebToken.encode({user_id: user.id, exp: (Time.now + 2.week).to_i}),
+    }
+  end
 end

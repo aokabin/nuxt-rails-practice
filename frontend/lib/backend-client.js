@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 export const request = (method, url, body) => {
   method = method.toLowerCase()
   return axios[method](url, body)
@@ -9,4 +10,10 @@ export const Login = function(parameters = {}) {
   const path = '/login'
   const body = parameters
   return request('post', domain + path, body)
+}
+
+export const Check = function() {
+  const domain = 'http://localhost:3001'
+  const path = '/check'
+  return request('get', domain + path)
 }

@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   get 'check', to: 'sessions#check'
 
+  get 'items', to: 'items#index'
+
   root 'pages#index'
 end
